@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<!-- 1. musician code goes here -->
+<head>
+    <title>Welcome to JavaScript</title>
+    <!--Modifying Pages using Bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>    
+</head>
+<body>
+    <div class="container p-1 my-1 bg-secondary text-white">
+    <h1 style="text-align:center">Musician guess by Sai Maneendra Pingili</h1>
+    <h2 style="text-align: center">Getting input</h2>
+</div>
+
+<div class="container">
+    <form>
+        <div class="form-group">
+            <label for="form1_age">What is your age </label>
+            <input type="number" class="form-control" id="form1_age" name="form1_age" min=10 max=50 step=2 value=30>
+            <br>
+        </div>
+        <div class="form-group">
+            <label for="form1_nick">What is your nickname </label>
+            <input type="text" class="form-control" id="form1_nick" name="form1_nick" autofocus> <br>
+        </div>
+        <input type="button" class="btn btn-info" onclick="resolveForm()" value="Get values from form">
+    </form>
+
+    <p id="result">This text will be replaced </p>
+</div>
+
+<script>
+    function resolveForm() {
+        console.log("Getting form values")
+        age = document.getElementById("form1_age").value
+        nick = document.getElementById("form1_nick").value
+        confirmed = confirm("Are these the values? " + age + " and " + nick)
+
+        out = document.getElementById("result")
+        if (confirmed) {
+            out.innerHTML = "Values were confirmed"
+        } else {
+            out.innerHTML = "Values were not confirmed"
+        }
+    }
+</script>
+<!-- Part 3 : Create the input form and build the response code. -->
+<div class="container">
+    <form>
+        <div class="form-group">
+            <label for="form2_musician">Enter the secret musician name</label>
+            <input type="password" class="form-control" id="form2_musician" name="form2_musician" min=10 max=50 step=2
+                value="John Lennon"><br>
+        </div>
+        <div class="form-group">
+            <label for="form2_guess">Guess the musician</label>
+            <input type="text" class="form-control" id="form2_guess" name="form2_guess" min=10 max=50 step=2><br>
+        </div>
+        <input type="button" class="btn btn-success" onclick="checkGuess()" value="Check the guess">
+    </form>
+    
+    <p id="results"></p>
+</div>
+
+<script>
+    let correct=0
+    let wrong=0
+    let try_correct = 0
+    let try_wrong = 0 
+    function checkGuess() {
+        secret = document.getElementById("form2_musician").value
+        guess = document.getElementById("form2_guess").value
+    
+        result = document.getElementById("results")
+        if(secret == guess){
+            correct+=1
+            try_correct=try_correct + 1
+            alert("You got it right");
+            document.getElementById("results").innerHTML = "Correct guesses are " + correct + " and Wrong guesses are " + wrong
+        } else { 
+            wrong+=1
+            try_wrong= try_wrong + 1
+            alert("Wrong Musician");
+            if(try_correct==0 && try_wrong%3==0 && try_wrong!=0) {
+                alert("Sorry, game over.");
+                wrong = 0  
+                correct = 0
+            } else if(try_correct>0){
+                try_correct=0
+                try_wrong=0
+            }
+            document.getElementById("results").innerHTML = "Correct guesses are " + correct + " and Wrong guesses are " + wrong   
+        }
+    }
+</script>
+<br>
+<!-- Part 4 : Swapping the images -->
+<div class="container">
+    <img src="praying-mantis.jpg" class="bordered mx-auto d-block" width="100px" height="100px" alt="Praying_Mantis" id="images" onclick="swapImage()">
+</div>
+<script>
+    let useImage = 1
+    function swapImage(){
+    switch(useImage){
+        case 1:
+            document.getElementById("images").src="praying-mantis.jpg";
+            useImage+=1;
+            break;
+            case 2:
+            document.getElementById("images").src="grasshopper.jpg";
+            useImage+=1;
+            break;
+            case 3:
+            document.getElementById("images").src="ice_bugs.jpg";
+            useImage=1;
+            break;
+        }
+    }
+</script>
+<!-- 2. musician code goes here -->
+<div class="container">
+    <ul class="pager">
+        <li class="next">
+            <a href="discount.html">Discount Page</a>
+        </li>
+    </ul>
+</div>
+</body>
+</html> 
